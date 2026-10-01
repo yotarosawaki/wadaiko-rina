@@ -13,7 +13,8 @@ html,body{margin:0;height:100%;overflow:hidden;background:#140d2b;color:#fff;
   font-family:'M PLUS Rounded 1c','Mitr','Hiragino Maru Gothic ProN','Meiryo',sans-serif;
   user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 .th{font-family:'Mitr','M PLUS Rounded 1c',sans-serif;font-weight:500}
-#cv{position:fixed;inset:0;width:100%;height:100%;touch-action:none;display:block}
+#app{position:fixed;left:0;top:0;width:100%;height:100%;overflow:hidden;transform-origin:0 0}
+#cv{position:absolute;left:0;top:0;width:100%;height:100%;touch-action:none;display:block}
 .screen{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px}
 .screen.on{display:flex}
 button{font-family:inherit;cursor:pointer}
@@ -90,13 +91,13 @@ button{font-family:inherit;cursor:pointer}
 .opts select{font-family:inherit;font-size:13px;border-radius:8px;padding:2px 4px}
 #btnPlay{align-self:center;margin-top:auto}
 .keys{font-size:12px;opacity:.75;text-align:center}
-@media (max-width:720px){
-  .selBody{flex-direction:column}
-  #songList{flex:none;max-height:38%;}
-  #detail{border-left:none;border-top:2px solid rgba(242,183,5,.4);padding:10px 12px;gap:8px}
-  .dTitle{font-size:19px}.miniRina{width:56px;height:68px}.talk{font-size:13px}
-  #btnPlay{font-size:19px;padding:10px 30px}
-}
+html.narrow .selBody{flex-direction:column}
+html.narrow #songList{flex:none;max-height:38%;}
+html.narrow #detail{border-left:none;border-top:2px solid rgba(242,183,5,.4);padding:10px 12px;gap:8px}
+html.narrow .dTitle{font-size:19px}
+html.narrow .miniRina{width:56px;height:68px}
+html.narrow .talk{font-size:13px}
+html.narrow #btnPlay{font-size:19px;padding:10px 30px}
 /* ---------- Play ---------- */
 #play{padding:0;pointer-events:none}
 #rinaPlay{position:absolute;left:6px;bottom:4px;pointer-events:none}
@@ -124,52 +125,63 @@ button{font-family:inherit;cursor:pointer}
 .resRank{font-size:15px;font-weight:800}
 .resRank em{font-style:normal;font-size:34px;color:var(--red);margin-left:6px}
 .btns{display:flex;gap:12px;justify-content:center;margin-top:10px;flex-wrap:wrap}
-@media (max-width:600px) and (min-height:521px){.resMain{flex-direction:column}#rinaRes{width:120px;height:148px}.resScore{font-size:32px}.resTable b{font-size:16px}}
+html.n600:not(.short) .resMain{flex-direction:column}
+html.n600:not(.short) #rinaRes{width:120px;height:148px}
+html.n600:not(.short) .resScore{font-size:32px}
+html.n600:not(.short) .resTable b{font-size:16px}
 /* ---------- 横画面（スマホ） ---------- */
 #rotate{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;
   background:radial-gradient(circle at 50% 40%,#5b2a6e,#140d2b);text-align:center;padding:24px;font-weight:800;font-size:20px}
 #rotate .phone{width:70px;height:120px;border:5px solid #fff;border-radius:14px;animation:rot 2s ease-in-out infinite}
 @keyframes rot{0%,30%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
 #rotate .rinaBox{width:120px;height:147px}
-@media (orientation:portrait) and (pointer:coarse){#rotate{display:flex}}
 #safeProbe{position:fixed;left:0;top:0;width:0;height:0;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);pointer-events:none;visibility:hidden}
 .screen{padding:max(8px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
 #play{padding:0}
 #rinaPlay{left:calc(6px + env(safe-area-inset-left))}
 #pauseBtn{right:calc(10px + env(safe-area-inset-right))}
-@media (max-height:520px){
-  #title{flex-direction:row;flex-wrap:wrap;gap:4px 24px;align-content:center}
-  #title .logo{order:1}
-  #rinaTitle{order:2;width:min(40vh,170px);height:min(52vh,208px);margin:0}
-  #rinaTitle .bubble{left:-40%;bottom:96%;font-size:13px;min-width:170px}
-  #btnStart{order:3;flex-basis:100%;max-width:300px;margin:0 auto}
-  .hint{order:4;flex-basis:100%;margin-top:0;font-size:11px}
-  .logo h1{font-size:clamp(40px,8vw,72px)}
-  .credit{font-size:9.5px;bottom:2px}
-  .selWrap{height:100%;border-radius:14px}
-  .selHead{padding:5px 10px}.selHead h2{font-size:16px}.back{width:30px;height:30px;font-size:13px}
-  #songList{padding:6px}
-  #songList li{padding:5px 8px;margin-bottom:4px;gap:8px}
-  #songList .ico{width:30px;height:30px;font-size:19px}
-  #songList b{font-size:14px}#songList small{font-size:11px}
-  #detail{padding:8px 12px;gap:6px}
-  .dTitle{font-size:18px}.dMeta{font-size:12px}
-  .miniRina{width:48px;height:59px}.talk{font-size:12px;padding:6px 9px}
-  .diff{padding:5px 2px}.diff .dn{font-size:12px}
-  .opts{font-size:12px;gap:4px 10px}
-  #btnPlay{font-size:18px;padding:9px 30px}
-  .keys{display:none}
-  .resCard{padding:10px 14px}
-  .resMain{flex-direction:row;margin-top:4px}
-  #rinaRes{width:110px;height:135px;margin-top:0}
-  #rinaRes .bubble{left:-10%;bottom:100%;min-width:180px;font-size:12px}
-  .resScore{font-size:28px}.resBadge{font-size:17px}
-  .resTable{margin:4px 0}.resTable div{padding:3px 2px}.resTable b{font-size:16px}
-  .btns{margin-top:6px}.btns .bigBtn{font-size:18px;padding:9px 28px}
-}
+html.short #title{flex-direction:row;flex-wrap:wrap;gap:4px 24px;align-content:center}
+html.short #title .logo{order:1}
+html.short #rinaTitle{order:2;width:min(40vh,170px);height:min(52vh,208px);margin:0}
+html.short #rinaTitle .bubble{left:-40%;bottom:96%;font-size:13px;min-width:170px}
+html.short #btnStart{order:3;flex-basis:100%;max-width:300px;margin:0 auto}
+html.short .hint{order:4;flex-basis:100%;margin-top:0;font-size:11px}
+html.short .logo h1{font-size:clamp(40px,8vw,72px)}
+html.short .credit{font-size:9.5px;bottom:2px}
+html.short .selWrap{height:100%;border-radius:14px}
+html.short .selHead{padding:5px 10px}
+html.short .selHead h2{font-size:16px}
+html.short .back{width:30px;height:30px;font-size:13px}
+html.short #songList{padding:6px}
+html.short #songList li{padding:5px 8px;margin-bottom:4px;gap:8px}
+html.short #songList .ico{width:30px;height:30px;font-size:19px}
+html.short #songList b{font-size:14px}
+html.short #songList small{font-size:11px}
+html.short #detail{padding:8px 12px;gap:6px}
+html.short .dTitle{font-size:18px}
+html.short .dMeta{font-size:12px}
+html.short .miniRina{width:48px;height:59px}
+html.short .talk{font-size:12px;padding:6px 9px}
+html.short .diff{padding:5px 2px}
+html.short .diff .dn{font-size:12px}
+html.short .opts{font-size:12px;gap:4px 10px}
+html.short #btnPlay{font-size:18px;padding:9px 30px}
+html.short .keys{display:none}
+html.short .resCard{padding:10px 14px}
+html.short .resMain{flex-direction:row;margin-top:4px}
+html.short #rinaRes{width:110px;height:135px;margin-top:0}
+html.short #rinaRes .bubble{left:-10%;bottom:100%;min-width:180px;font-size:12px}
+html.short .resScore{font-size:28px}
+html.short .resBadge{font-size:17px}
+html.short .resTable{margin:4px 0}
+html.short .resTable div{padding:3px 2px}
+html.short .resTable b{font-size:16px}
+html.short .btns{margin-top:6px}
+html.short .btns .bigBtn{font-size:18px;padding:9px 28px}
 </style>
 </head>
 <body>
+<div id="app">
 <canvas id="cv"></canvas>
 <div id="safeProbe"></div>
 <div id="rotate"><div class="rinaBox" id="rinaRot"></div><div class="phone"></div><div>スマホを<b style="color:#ffd23f">横向き</b>にしてね！</div><div class="th" style="font-size:14px;opacity:.85">กรุณาหมุนโทรศัพท์เป็นแนวนอน</div></div>
@@ -246,6 +258,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
+</div>
 <script>
 'use strict';
 /* =========================================================
@@ -335,7 +348,10 @@ function mountRina(el, withBubble = true) {
    ========================================================= */
 let AC = null, master, sfxBus, musicBus, NOISE;
 function initAudio() {
-  if (AC) { if (AC.state === 'suspended') AC.resume(); return; }
+  if (AC) { if (AC.state !== 'running') AC.resume(); return; }
+  // iPhoneのマナーモードでも音が出るように
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) { }
+  try { const a = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAACAgICA'); a.loop = true; a.setAttribute('playsinline', ''); a.volume = 0.01; a.play().catch(() => { }); } catch (e) { }
   AC = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: 'interactive' });
   const comp = AC.createDynamicsCompressor();
   comp.threshold.value = -12; comp.ratio.value = 4; comp.attack.value = 0.003; comp.release.value = 0.15;
@@ -343,6 +359,8 @@ function initAudio() {
   master = AC.createGain(); master.gain.value = vol(); master.connect(comp);
   sfxBus = AC.createGain(); sfxBus.gain.value = 1; sfxBus.connect(master);
   musicBus = newBus();
+  { const b = AC.createBufferSource(); b.buffer = AC.createBuffer(1, 1, 22050); b.connect(AC.destination); b.start(0); }
+  if (AC.state !== 'running') AC.resume();
   NOISE = AC.createBuffer(1, AC.sampleRate, AC.sampleRate);
   const d = NOISE.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
 }
@@ -786,18 +804,25 @@ let best = store.get('best', {});
    ========================================================= */
 const $ = s => document.querySelector(s);
 const cv = $('#cv'), cx = cv.getContext('2d');
-let W = 0, H = 0, DPR = 1;
+let W = 0, H = 0, DPR = 1, ROT = false;
 function resize() {
   detectTouch(); DPR = Math.min(window.devicePixelRatio || 1, 2);
-  W = window.innerWidth; H = window.innerHeight;
+  const vw = window.innerWidth, vh = window.innerHeight, app = $('#app');
+  // 縦向きロック中のスマホでも横画面で遊べるよう、縦長のときは画面ごと90度回す
+  ROT = isTouch && vh > vw;
+  if (ROT) { W = vh; H = vw; app.style.width = vh + 'px'; app.style.height = vw + 'px'; app.style.transform = `translateX(${vw}px) rotate(90deg)`; }
+  else { W = vw; H = vh; app.style.width = app.style.height = app.style.transform = ''; }
   cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
   cx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const hc = document.documentElement.classList;
+  hc.toggle('short', H <= 520); hc.toggle('narrow', W <= 720); hc.toggle('n600', W <= 600);
   sceneCache = null; layoutPlay();
 }
 window.addEventListener('resize', resize);
 let isTouch = false;
 const detectTouch = () => isTouch = isTouch || matchMedia('(pointer:coarse)').matches || navigator.maxTouchPoints > 0;
-window.addEventListener('pointerdown', e => { if (e.pointerType === 'touch' && !isTouch) { isTouch = true; layoutPlay(); } }, true);
+['touchend', 'pointerdown'].forEach(t => window.addEventListener(t, () => { if (AC && AC.state !== 'running' && scr !== 'pause') AC.resume(); }, true));
+window.addEventListener('pointerdown', e => { if (e.pointerType === 'touch' && !isTouch) { isTouch = true; resize(); } }, true);
 
 let scr = 'title';
 function show(id) {
@@ -1394,7 +1419,9 @@ window.addEventListener('keydown', e => {
 cv.addEventListener('pointerdown', e => {
   if (scr !== 'play' || !L.drumR) return;
   e.preventDefault();
-  const d = Math.hypot(e.clientX - L.drumX, e.clientY - L.drumY);
+  let x = e.clientX, y = e.clientY;
+  if (ROT) { x = e.clientY; y = window.innerWidth - e.clientX; }
+  const d = Math.hypot(x - L.drumX, y - L.drumY);
   hit(d < L.drumR * .66 ? 'don' : 'ka');
 });
 document.addEventListener('contextmenu', e => { if (scr === 'play') e.preventDefault(); });
