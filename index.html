@@ -101,6 +101,11 @@ html.narrow #btnPlay{font-size:19px;padding:10px 30px}
 /* ---------- Play ---------- */
 #play{padding:0;pointer-events:none}
 #rinaPlay{position:absolute;left:6px;bottom:4px;pointer-events:none}
+/* プレイ中の吹き出しはリナ先生の右横に出して、音符のレーンに重ならないようにする */
+#rinaPlay .bubble{left:78%;top:4px;bottom:auto;max-width:240px;min-width:140px;width:max-content;font-size:14px;transform-origin:0 30%}
+#rinaPlay .bubble::after{left:-17px;top:14px;bottom:auto;border:8px solid transparent;border-right:9px solid var(--ink)}
+#rinaPlay .bubble::before{left:-9px;top:17px;bottom:auto;border:5px solid transparent;border-right:6px solid #fff}
+html.short #rinaPlay .bubble{font-size:12.5px;max-width:220px;padding:6px 10px;line-height:1.4}
 #pauseBtn{position:absolute;right:10px;top:8px;width:34px;height:30px;border-radius:8px;border:2px solid #fff;background:rgba(0,0,0,.3);color:#fff;
   font-weight:800;pointer-events:auto;font-size:13px}
 #pause{background:rgba(0,0,0,.55);flex-direction:column;gap:14px;z-index:10}
@@ -1005,6 +1010,8 @@ function layoutPlay() {
   L.drumX = W - L.drumR - 16 - safeR; L.drumY = H - L.drumR - 8;
   const rp = $('#rinaPlay'), rh = Math.max(100, Math.min(250, L.stageH * .82));
   rp.style.height = rh + 'px'; rp.style.width = rh * 220 / 270 + 'px';
+  const bub = rp.querySelector('.bubble');
+  if (bub) bub.style.maxWidth = Math.max(130, Math.min(240, (L.drumR ? L.drumX - L.drumR : W) - (L.safeL + 6 + rh * 220 / 270 * .78) - 10)) + 'px';
 }
 
 let G = null, rinaPlay, rinaTitle, rinaMini, rinaRes;
